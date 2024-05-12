@@ -1,10 +1,40 @@
+import { useMemo, useState } from "react";
 import CommonHeader from "@/components/common/header/CommonHeader";
 import styles from "./styles/index.module.scss";
 import CommonSearchBar from "@/components/common/searchBar/CommonSearchBar";
 import CommonNav from "@/components/common/navigation/CommonNav";
 import CommonFooter from "@/components/common/footer/CommonFooter";
 import Card from "./components/Card";
+import DetailDialog from "@/components/common/dialog/DetailDialog";
+import { CardDTO } from "./types/card";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { imageData } from "@/recoil/selectors/imageSelectors";
+
 function index() {
+    const imageSelector = useRecoilValueLoadable(imageData);
+    const [imgData, setImgData] = useState<CardDTO>();
+    const [open, setOpen] = useState<boolean>(false);
+
+    const CARD_LIST = useMemo(() => {
+        if (imageSelector.state === "hasValue") {
+            const result = imageSelector.contents.results.map(
+                (card: CardDTO) => {
+                    return (
+                        <Card
+                            data={card}
+                            key={card.id}
+                            handleDialog={setOpen}
+                            handleSetData={setImgData}
+                        />
+                    );
+                }
+            );
+            return result;
+        } else {
+            return <div>loading...</div>;
+        }
+    }, [imageSelector]);
+
     return (
         <div className={styles.page}>
             <CommonHeader />
@@ -24,12 +54,11 @@ function index() {
                     </div>
                 </div>
                 <div className={styles.page__contents__imageBox}>
-                    <Card />
-                    <Card />
-                    <Card />
+                    {CARD_LIST}
                 </div>
             </div>
             <CommonFooter />
+            {open && <DetailDialog data={imgData} handleDialog={setOpen} />}
         </div>
     );
 }

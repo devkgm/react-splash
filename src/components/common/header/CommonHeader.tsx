@@ -1,7 +1,7 @@
 import styles from "./CommonHeader.module.scss";
 function CommonHeader() {
     return (
-        <div className={styles.header}>
+        <header className={styles.header}>
             <div className={styles.header__logoBox}>
                 <img
                     src='src/assets/images/image-logo.png'
@@ -23,7 +23,7 @@ function CommonHeader() {
                     devkgm | gm.kim333@gmail.com
                 </button>
             </div>
-        </div>
+        </header>
     );
 }
 export default CommonHeader;
