@@ -48,7 +48,7 @@ function CommonFooter() {
                     className={styles.pagination__button}
                     onClick={moveToPrev}
                 >
-                    <img src='src/assets/icons/icon-arrowLeft.svg' alt='' />
+                    <img src='/icons/icon-arrowLeft.svg' alt='' />
                 </button>
                 {res[step] &&
                     res[step].map((item: number, index: number) => {
@@ -85,7 +85,7 @@ function CommonFooter() {
                     className={styles.pagination__button}
                     onClick={moveToNext}
                 >
-                    <img src='src/assets/icons/icon-arrowRight.svg' alt='' />
+                    <img src='/icons/icon-arrowRight.svg' alt='' />
                 </button>
             </div>
         </footer>

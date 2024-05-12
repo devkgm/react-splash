@@ -43,7 +43,7 @@ function CommonSearchBar() {
                     onKeyDown={handleKeyDown}
                 />
                 <img
-                    src='src/assets/icons/icon-search.svg'
+                    src='/icons/icon-search.svg'
                     alt='searchIcon'
                     onClick={onSearch}
                 />
