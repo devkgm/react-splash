@@ -1,11 +1,10 @@
 import { selector } from "recoil";
 
 import axios from "axios";
-import { searchState } from "../atoms/searchState";
-import { pageState } from "../atoms/pageState";
+import { pageState, searchState, PER_PAGE } from "../atoms/pager";
 const API_URL = "https://api.unsplash.com/search/photos";
 const API_KEY = import.meta.env.VITE_API_KEY;
-const PER_PAGE = 30;
+
 
 export const imageData = selector({
     key: "imageData",

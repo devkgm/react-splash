@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./CommonNav.module.scss";
 import navJson from "./nav.json";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { pageState } from "@/recoil/atoms/pageState";
-import { searchState } from "@/recoil/atoms/searchState";
+import { pageState, searchState } from "@/recoil/atoms/pager";
 import { Link, useLocation } from "react-router-dom";
 
 interface Navigation {

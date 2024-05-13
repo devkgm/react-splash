@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styles from "./CommonSearchBar.module.scss";
 import { useRecoilState } from "recoil";
-import { searchState } from "@/recoil/atoms/searchState";
-import { pageState } from "@/recoil/atoms/pageState";
+import {pageState, searchState } from "@/recoil/atoms/pager";
 
 function CommonSearchBar() {
     const [text, setText] = useState("");
