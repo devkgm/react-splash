@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./CommonHeader.module.scss";
 function CommonHeader() {
     return (
@@ -16,7 +17,7 @@ function CommonHeader() {
                 <button className={styles.header__profileBox__button}>
                     사진제출
                 </button>
-                <button className={styles.header__profileBox__button}>
+                <button onClick={()=>location.href="/bookmark"} className={styles.header__profileBox__button}>
                     북마크
                 </button>
                 <span className={styles.header__profileBox__userName}>

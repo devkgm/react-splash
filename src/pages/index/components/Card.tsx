@@ -1,4 +1,4 @@
-import { CardDTO } from "../types/card";
+import { CardDTO } from "../../../types/card";
 import styles from "./Card.module.scss";
 interface Props {
     data: CardDTO;

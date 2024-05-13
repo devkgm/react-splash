@@ -1,5 +1,10 @@
-import { CardDTO, Tag } from "@/pages/index/types/card";
+import { CardDTO, Tag } from "@/types/card";
 import styles from "./DetailDialog.module.scss";
+import { appendItem, getItem, removeItem } from "@/utils/localStorage";
+import toast, { toastConfig } from 'react-simple-toasts';
+import 'react-simple-toasts/dist/theme/dark.css';
+import { useRecoilState, useRecoilValue } from "recoil";
+import { bookMarkState } from "@/recoil/atoms/bookMarkState";
 
 interface Props {
     data: CardDTO;
@@ -7,6 +12,20 @@ interface Props {
 }
 
 function DetailDialog({ data, handleDialog }: Props) {
+    const [bookmark, setBookmark] = useRecoilState(bookMarkState);
+    toastConfig({ theme: 'dark' });
+
+    const handleBookmark = () => {
+        if(bookmark.map(bookmark => bookmark.id).includes(data.id)) {
+            removeItem("bookmark", data);
+            toast("북마크에서 삭제했어요!");
+            setBookmark(bookmark.filter(b=> b.id != data.id))
+        } else {
+            appendItem("bookmark", data);
+            toast("북마크에 추가했어요!")
+            setBookmark(bookmark.concat(data))
+        }
+    }
     return (
         <div className={styles.container}>
             <div className={styles.container__dialog}>
@@ -33,13 +52,22 @@ function DetailDialog({ data, handleDialog }: Props) {
                         </span>
                     </div>
                     <div className={styles.bookmark}>
-                        <button className={styles.bookmark__button}>
-                            <span
-                                className='material-symbols-outlined'
-                                style={{ fontSize: 16 + "px" }}
-                            >
-                                favorite
-                            </span>
+                        <button className={styles.bookmark__button} onClick={handleBookmark}>
+                            {
+                                bookmark.map(bookmark => bookmark.id).includes(data.id) ?
+                                <span
+                                    className='material-symbols-outlined'
+                                    style={{ fontSize: 16 + "px", color: "red" }}
+                                >
+                                    bookmark
+                                </span> :
+                                <span
+                                    className='material-symbols-outlined'
+                                    style={{ fontSize: 16 + "px" }}
+                                >
+                                    bookmark
+                                </span> 
+                            }
                             북마크
                         </button>
                         <button className={styles.bookmark__button}>

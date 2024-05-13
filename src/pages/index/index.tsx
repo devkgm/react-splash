@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CommonHeader from "@/components/common/header/CommonHeader";
 import styles from "./styles/index.module.scss";
 import CommonSearchBar from "@/components/common/searchBar/CommonSearchBar";
@@ -6,14 +6,17 @@ import CommonNav from "@/components/common/navigation/CommonNav";
 import CommonFooter from "@/components/common/footer/CommonFooter";
 import Card from "./components/Card";
 import DetailDialog from "@/components/common/dialog/DetailDialog";
-import { CardDTO } from "./types/card";
+import { CardDTO } from "@/types/card";
 import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { imageData } from "@/recoil/selectors/imageSelectors";
+import { getItem } from "@/utils/localStorage";
+import { bookMarkState } from "@/recoil/atoms/bookMarkState";
 
 function index() {
     const imageSelector = useRecoilValueLoadable(imageData);
     const [imgData, setImgData] = useState<CardDTO>();
     const [open, setOpen] = useState<boolean>(false);
+    
 
     const CARD_LIST = useMemo(() => {
         if (imageSelector.state === "hasValue") {

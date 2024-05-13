@@ -18,7 +18,7 @@ export const endPageState = selector({
         const totalPage = get(totalPageState);
         const block = Math.floor(page/10) + (page%10 > 0 ? 1 : 0);
 
-        const endPage = (totalPage < page + 10)  ? ((1 + (block - 1)* 10) + totalPage%10) : (10 + (block - 1)* 10);
+        const endPage = (totalPage < page + 10)  ? ((1 + (block - 1)* 10) + totalPage%10)-1 : (10 + (block - 1)* 10);
         return endPage;
     },
 })
