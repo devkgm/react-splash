@@ -19,9 +19,9 @@ function CommonHeader() {
                 <button className={styles.header__profileBox__button}>
                     북마크
                 </button>
-                <button className={styles.header__profileBox__userName}>
+                <span className={styles.header__profileBox__userName}>
                     devkgm | gm.kim333@gmail.com
-                </button>
+                </span>
             </div>
         </header>
     );
