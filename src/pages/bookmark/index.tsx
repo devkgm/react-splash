@@ -17,18 +17,17 @@ function index() {
     const [open, setOpen] = useState<boolean>(false);
     const bookmark = useRecoilValue(bookMarkState);
 
-    const CARD_LIST = bookmark.map(card => 
-        <Card
-            data={card}
-            key={card.id}
-        />
-    )
+    const CARD_LIST = bookmark.map((card) => (
+        <Card data={card} key={card.id} />
+    ));
     return (
         <div className={styles.page}>
             <CommonHeader />
             <div className={styles.page__contents}>
                 <div className={styles.page__contents__imageBox}>
-                    {CARD_LIST}
+                    {CARD_LIST.length === 0
+                        ? "북바크된 이미지가 없습니다."
+                        : CARD_LIST}
                 </div>
             </div>
             {open && <DetailDialog data={imgData} handleDialog={setOpen} />}
